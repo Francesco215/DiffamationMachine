@@ -1,12 +1,8 @@
-#To use this file put in the folder of the DataExport of Telegram and run it
-#To change the target just change the identifier
-
-
 import json
 from shutil import copy2
 import os
 
-identifier=4867533164
+identifier=4727634165
 
 with open("result.json","r") as read_file:
     data=json.load(read_file)
@@ -21,10 +17,9 @@ def find(x):
 def extract_audio(identifier,name,json):
     files=[]
     for chat in data['chats']['list']:
-        if chat['id']==identifier:
-            for message in chat['messages']:
-                if ("media_type" in message) and message['from_id']==identifier and message["media_type"]=="voice_message":
-                    files.append(message["file"])
+        for message in chat['messages']:
+            if ("media_type" in message) and message['from_id']==identifier and message["media_type"]=="voice_message":
+                files.append(message["file"])
         if chat['type']=='private_group':
             for membri in chat['messages'][0]['members']:
                 if membri==name:
